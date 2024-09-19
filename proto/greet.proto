@@ -6,8 +6,22 @@ package grpc;
 
 service GreetService{
     rpc SayHello(NoParam) returns (HelloResponse);
+    rpc SayHelloServerStreaming(NameList) returns (stream HelloResponse);
+    rpc SayHelloClentStreaming(stream HelloRequest) returns (MessageList);
+    rpc SayHelloBidirectionalStreaming(stream HelloRequest) returns (stream HelloResponse);
 }
 
+message NameList {
+    repeated string names = 1;
+}
+
+message HelloRequest {
+    string message = 1;
+}
+
+message MessageList {
+    repeated string messages = 1;
+}
 
 message NoParam {};
 
